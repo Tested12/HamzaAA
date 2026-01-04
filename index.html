@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حمزة العقاري - منصة العقارات الأولى</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-building"></i>
+                    <span>حمزة العقاري</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#overview">الرئيسية</a></li>
+                    <li><a href="#market">السوق</a></li>
+                    <li><a href="#features">الميزات</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#audience">الجمهور</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="openModal('loginModal')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        تسجيل الدخول
+                    </button>
+                    <button class="btn btn-primary" onclick="openModal('registerModal')">
+                        <i class="fas fa-user-plus"></i>
+                        إنشاء حساب
+                    </button>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('loginModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                <h2>تسجيل الدخول</h2>
+                <p>مرحباً بعودتك! سجل دخولك للمتابعة</p>
+            </div>
+            <form class="modal-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">البريد الإلكتروني</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="example@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('loginPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox">
+                        <span>تذكرني</span>
+                    </label>
+                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i>
+                    تسجيل الدخول
+                </button>
+            </form>
+            <div class="modal-footer">
+                <p>ليس لديك حساب؟ <a href="#" onclick="switchModal('loginModal', 'registerModal')">إنشاء حساب جديد</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('registerModal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2>إنشاء حساب جديد</h2>
+                <p>انضم إلينا واستمتع بخدماتنا</p>
+            </div>
+            <form class="modal-form" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">الاسم الكامل</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerName" placeholder="أدخل اسمك الكامل" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">البريد الإلكتروني</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="registerEmail" placeholder="example@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">رقم الهاتف</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="registerPhone" placeholder="07XXXXXXXX" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="registerPassword" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('registerPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userType">نوع الحساب</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-users"></i>
+                        <select id="userType" required>
+                            <option value="">اختر نوع الحساب</option>
+                            <option value="buyer">مشتري / مستأجر</option>
+                            <option value="owner">صاحب عقار</option>
+                            <option value="agent">وسيط عقاري</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" required>
+                        <span>أوافق على <a href="#">الشروط والأحكام</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-user-plus"></i>
+                    إنشاء الحساب
+                </button>
+            </form>
+            <div class="modal-footer">
+                <p>لديك حساب بالفعل؟ <a href="#" onclick="switchModal('registerModal', 'loginModal')">تسجيل الدخول</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- نظرة عامة على الموقع -->
+    <section class="section" id="overview">
+        <div class="section-header">
+            <h2>نظرة عامة على الموقع</h2>
+        </div>
+        <div class="container">
+            <div class="overview-content">
+                <div class="overview-text">
+                    <p class="overview-description">موقع حمزة العقاري، يوفر معلومات شاملة عن العقارات مع خدمات احترافية.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-camera"></i> توفير خدمات التصوير الاحترافي للعقارات</li>
+                        <li><i class="fas fa-file-alt"></i> عرض معلومات شاملة عن العقارات</li>
+                        <li><i class="fas fa-check-circle"></i> توفير وثائق موثوقة عن العقارات</li>
+                        <li><i class="fas fa-search"></i> محرك بحث متقدم للعقارات</li>
+                    </ul>
+                </div>
+                <div class="overview-images">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-preview app-1">
+                                <div class="app-header-bar">More homes for sale nationwide than any other app</div>
+                                <div class="app-content-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-preview app-2">
+                                <div class="app-header-bar">Instantly see home prices using augmented reality</div>
+                                <div class="app-content-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="app-preview app-3">
+                                <div class="app-header-bar">Snap a for sale sign and instantly get home details</div>
+                                <div class="app-content-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تحليل السوق -->
+    <section class="section" id="market">
+        <div class="section-header">
+            <h2>تحليل السوق</h2>
+        </div>
+        <div class="container">
+            <p class="section-subtitle">سوق العقارات في الأردن ينمو بشكل متزايد، مع زيادة الطلب على المنصات الرقمية لتسهيل عمليات البيع والشراء</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-number">7.2%</div>
+                    <div class="stat-label">معدل النمو السنوي للسوق العقاري</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-number">+42,000</div>
+                    <div class="stat-label">صفقة عقارية سنوياً في الأردن</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-number">68%</div>
+                    <div class="stat-label">من المشترين يفضلون البحث عبر الإنترنت</div>
+                </div>
+            </div>
+
+            <div class="market-info-grid">
+                <div class="market-card trends">
+                    <h3><i class="fas fa-chart-bar"></i> اتجاهات السوق</h3>
+                    <ul>
+                        <li><i class="fas fa-arrow-up"></i> زيادة الطلب على العقارات السكنية</li>
+                        <li><i class="fas fa-arrow-up"></i> نمو في قطاع العقارات التجارية</li>
+                        <li><i class="fas fa-arrow-up"></i> توجه نحو التقنيات الرقمية في العقارات</li>
+                    </ul>
+                </div>
+                <div class="market-card opportunities">
+                    <h3><i class="fas fa-lightbulb"></i> فرص السوق</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> نقص في المنصات المتخصصة للعقارات</li>
+                        <li><i class="fas fa-check-circle"></i> حاجة لخدمات مصورة احترافية للعقارات</li>
+                        <li><i class="fas fa-check-circle"></i> فرصة لدمج التقنيات الحديثة في البحث</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الميزات الرئيسية -->
+    <section class="section" id="features">
+        <div class="section-header">
+            <h2>الميزات الرئيسية</h2>
+        </div>
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>تصفح العقارات</h3>
+                    <ul>
+                        <li><i class="fas fa-sliders-h"></i> فلترة متقدمة حسب السعر والموقع</li>
+                        <li><i class="fas fa-images"></i> معرض صور عالي الجودة</li>
+                        <li><i class="fas fa-map-marker-alt"></i> عرض العقارات على الخريطة</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <h3>إضافة عقار</h3>
+                    <ul>
+                        <li><i class="fas fa-edit"></i> نموذج إدخال بسيط ومفصل</li>
+                        <li><i class="fas fa-image"></i> إرفاق الصور والمستندات</li>
+                        <li><i class="fas fa-tags"></i> تحديد السعر والمواصفات</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3>خدمات الشركة</h3>
+                    <ul>
+                        <li><i class="fas fa-camera"></i> تصوير احترافي للعقارات</li>
+                        <li><i class="fas fa-file-alt"></i> كتابة تفاصيل دقيقة وجذابة</li>
+                        <li><i class="fas fa-upload"></i> نشر العقار على المنصة</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>إدارة التواصل</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> نظام رسائل مدمج</li>
+                        <li><i class="fas fa-phone"></i> معلومات اتصال موثوقة</li>
+                        <li><i class="fas fa-calendar-check"></i> جدولة مواعيد المعاينة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- خدمات الشركة -->
+    <section class="section" id="services">
+        <div class="section-header">
+            <h2>خدمات الشركة</h2>
+        </div>
+        <div class="container">
+            <p class="section-subtitle">نقدم خدمات متكاملة لأصحاب العقارات لضمان عرض أفضل وإدارة فعالة للعملية من البداية إلى النهاية</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-number">1</span>
+                    <div class="service-icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <h3>تقديم التفاصيل</h3>
+                    <p>يقدم المالك تفاصيل العقار الأساسية عبر نموذج إلكتروني بسيط</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-number">2</span>
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>التصوير الاحترافي</h3>
+                    <p>فريقنا يزور العقار لالتقاط صور عالية الجودة وعرض احترافي</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-number">3</span>
+                    <div class="service-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>النشر والترويج</h3>
+                    <p>ننشر العقار مع وصف جذاب ومعلومات دقيقة على منصتنا</p>
+                </div>
+                <div class="service-card">
+                    <span class="service-number">4</span>
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>إدارة الاستفسارات</h3>
+                    <p>ندير الاستفسارات وننسق المواعيد للعملاء لرؤية الموقع</p>
+                </div>
+            </div>
+
+            <div class="service-badges">
+                <div class="badge">
+                    <i class="fas fa-check-double"></i>
+                    <span>تأكيد مصداقية العقارات</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>تسريع عملية البيع</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-star"></i>
+                    <span>عرض احترافي للعقارات</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- تحليل الجمهور المستهدف -->
+    <section class="section" id="audience">
+        <div class="section-header">
+            <h2>تحليل الجمهور المستهدف</h2>
+        </div>
+        <div class="container">
+            <p class="section-subtitle">يستهدف موقع حمزة العقاري ثلاث شرائح رئيسية من المستخدمين، مع تلبية احتياجات كل شريحة بشكل متخصص</p>
+            
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <div class="audience-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>أصحاب العقارات</h3>
+                    
+                    <div class="audience-section">
+                        <h4><i class="fas fa-users"></i> الفئة الديموغرافية</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> أصحاب العقارات السكنية والتجارية</li>
+                            <li><i class="fas fa-check-circle"></i> مطورو المشاريع العقارية</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="audience-section">
+                        <h4><i class="fas fa-bullseye"></i> الاحتياجات</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> عرض فعال للعقارات</li>
+                            <li><i class="fas fa-check-circle"></i> الوصول إلى مجموعة واسعة من المشترين</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>المشترون والمستأجرون</h3>
+                    
+                    <div class="audience-section">
+                        <h4><i class="fas fa-users"></i> الفئة الديموغرافية</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> الأفراد الباحثون عن سكن</li>
+                            <li><i class="fas fa-check-circle"></i> المستثمرون في العقارات</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="audience-section">
+                        <h4><i class="fas fa-bullseye"></i> الاحتياجات</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> معلومات دقيقة وموثوقة</li>
+                            <li><i class="fas fa-check-circle"></i> خيارات تصفح متقدمة</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="audience-card">
+                    <div class="audience-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3>وسطاء العقارات</h3>
+                    
+                    <div class="audience-section">
+                        <h4><i class="fas fa-users"></i> الفئة الديموغرافية</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> شركات الوساطة العقارية</li>
+                            <li><i class="fas fa-check-circle"></i> وكلاء البيع والشراء</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="audience-section">
+                        <h4><i class="fas fa-bullseye"></i> الاحتياجات</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> منصة لعرض محفظتهم</li>
+                            <li><i class="fas fa-check-circle"></i> أدوات لإدارة العملاء</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 حمزة العقاري - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

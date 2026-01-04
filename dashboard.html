@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حمزة العقاري - لوحة التحكم</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header dashboard-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-building"></i>
+                    <span>حمزة العقاري</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#search-section" class="active">البحث</a></li>
+                    <li><a href="#add-property-section">إضافة عقار</a></li>
+                    <li><a href="#pending-properties-section">الموافقات</a></li>
+                </ul>
+                <div class="user-menu">
+                    <div class="user-info">
+                        <span class="user-name">أحمد محمد</span>
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        خروج
+                    </button>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <!-- ========== قسم البحث وتصفح العقارات ========== -->
+        <section class="dashboard-section" id="search-section">
+            <div class="section-header">
+                <h2>عملية البحث وتصفح العقارات</h2>
+            </div>
+            <div class="container">
+                <div class="search-layout">
+                    <!-- فلاتر البحث -->
+                    <div class="search-filters-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h3>فلاتر البحث المتقدمة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="filter-group">
+                                <label><i class="fas fa-map-marker-alt"></i> الموقع</label>
+                                <input type="text" placeholder="عمّان" class="filter-input">
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label><i class="fas fa-home"></i> نوع العقار</label>
+                                <div class="filter-tags">
+                                    <button class="filter-tag active">شقة</button>
+                                    <button class="filter-tag">منزل</button>
+                                    <button class="filter-tag">أرض</button>
+                                    <button class="filter-tag">تجاري</button>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label><i class="fas fa-dollar-sign"></i> نطاق السعر</label>
+                                <div class="price-range">
+                                    <input type="number" placeholder="50,000" class="filter-input">
+                                    <span>-</span>
+                                    <input type="number" placeholder="300,000" class="filter-input">
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label><i class="fas fa-bed"></i> عدد الغرف</label>
+                                <div class="room-buttons">
+                                    <button class="room-btn">1</button>
+                                    <button class="room-btn">2</button>
+                                    <button class="room-btn active">3</button>
+                                    <button class="room-btn">+4</button>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary btn-full search-btn">
+                                <i class="fas fa-search"></i>
+                                بحث
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- نتائج البحث -->
+                    <div class="search-results">
+                        <div class="results-header">
+                            <h3><i class="fas fa-home"></i> نتائج البحث</h3>
+                            <button class="map-btn">
+                                <i class="fas fa-map-marker-alt"></i>
+                                عرض على الخريطة
+                            </button>
+                        </div>
+                        <div class="properties-grid">
+                            <!-- Property Card 1 -->
+                            <div class="property-card" data-property-id="1">
+                                <div class="property-image">
+                                    <div class="property-placeholder">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <span class="property-price">150,000 د.أ</span>
+                                    <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                                </div>
+                                <div class="property-info">
+                                    <h4>شقة فاخرة في عمان</h4>
+                                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> عمان، الأردن</p>
+                                    <div class="property-features">
+                                        <span><i class="fas fa-bed"></i> 3 غرف</span>
+                                        <span><i class="fas fa-bath"></i> 2 حمامات</span>
+                                        <span><i class="fas fa-ruler-combined"></i> 150م²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Property Card 2 -->
+                            <div class="property-card" data-property-id="2">
+                                <div class="property-image">
+                                    <div class="property-placeholder villa">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <span class="property-price">200,000 د.أ</span>
+                                    <button class="favorite-btn active"><i class="fas fa-heart"></i></button>
+                                </div>
+                                <div class="property-info">
+                                    <h4>فيلا حديثة في Abdoun</h4>
+                                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> عبدون، عمان</p>
+                                    <div class="property-features">
+                                        <span><i class="fas fa-bed"></i> 4 غرف</span>
+                                        <span><i class="fas fa-bath"></i> 3 حمامات</span>
+                                        <span><i class="fas fa-ruler-combined"></i> 250م²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- العقارات المحفوظة -->
+                    <div class="search-saved-card saved-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>العقارات المحفوظة</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="saved-properties-list">
+                                <div class="saved-property-item">
+                                    <div class="saved-property-image">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <div class="saved-property-info">
+                                        <h4>شقة فاخرة في عمان</h4>
+                                        <p><i class="fas fa-map-marker-alt"></i> عمان، الأردن</p>
+                                        <span class="saved-price">150,000 د.أ</span>
+                                    </div>
+                                    <button class="remove-saved"><i class="fas fa-times"></i></button>
+                                </div>
+                                
+                                <div class="saved-property-item">
+                                    <div class="saved-property-image villa">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="saved-property-info">
+                                        <h4>فيلا حديثة في Abdoun</h4>
+                                        <p><i class="fas fa-map-marker-alt"></i> عبدون، عمان</p>
+                                        <span class="saved-price">200,000 د.أ</span>
+                                    </div>
+                                    <button class="remove-saved"><i class="fas fa-times"></i></button>
+                                </div>
+                                
+                                <div class="saved-property-item">
+                                    <div class="saved-property-image">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <div class="saved-property-info">
+                                        <h4>شقة بـ3 غرف نوم</h4>
+                                        <p><i class="fas fa-map-marker-alt"></i> الرصيفة، عمان</p>
+                                        <span class="saved-price">120,000 د.أ</span>
+                                    </div>
+                                    <button class="remove-saved"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== قسم إضافة عقار ========== -->
+        <section class="dashboard-section" id="add-property-section">
+            <div class="section-header">
+                <h2>عملية إضافة عقار</h2>
+            </div>
+            <div class="container">
+                <div class="add-property-grid">
+                    <!-- Step 1: اختيار نوع العقار -->
+                    <div class="step-card">
+                        <span class="step-number">1</span>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3>اختيار نوع العقار</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="property-types">
+                                <button class="type-btn active">
+                                    <i class="fas fa-building"></i>
+                                    <span>شقة</span>
+                                </button>
+                                <button class="type-btn">
+                                    <i class="fas fa-home"></i>
+                                    <span>منزل</span>
+                                </button>
+                                <button class="type-btn">
+                                    <i class="fas fa-mountain"></i>
+                                    <span>أرض</span>
+                                </button>
+                                <button class="type-btn">
+                                    <i class="fas fa-store"></i>
+                                    <span>تجاري</span>
+                                </button>
+                            </div>
+                            <div class="sale-rent-toggle">
+                                <button class="toggle-btn active">
+                                    <i class="fas fa-tag"></i>
+                                    <span>إيجار</span>
+                                </button>
+                                <button class="toggle-btn">
+                                    <i class="fas fa-handshake"></i>
+                                    <span>شراء</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: تفاصيل العقار -->
+                    <div class="step-card">
+                        <span class="step-number">2</span>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>تفاصيل العقار</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label><i class="fas fa-map-marker-alt"></i> الموقع</label>
+                                <input type="text" value="عمان، الأردن" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-ruler-combined"></i> المساحة (م²)</label>
+                                <input type="number" value="150" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-bed"></i> عدد الغرف</label>
+                                <input type="number" value="3" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-bath"></i> عدد الحمامات</label>
+                                <input type="number" value="2" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: السعر والتواصل -->
+                    <div class="step-card">
+                        <span class="step-number">3</span>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <h3>السعر والتواصل</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> السعر</label>
+                                <input type="text" placeholder="150,000 د.أ" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> رقم التواصل</label>
+                                <input type="tel" placeholder="07XXXXXXXX" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                                <input type="email" placeholder="email@example.com" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: الصور والمستندات -->
+                    <div class="step-card">
+                        <span class="step-number">4</span>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <h3>الصور والمستندات</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>اسحب الصور هنا </p>
+                                <p> (يتم اضافة الصور من قبل فريق التصوير بعد الاتفاق مع العميل  (مالك العقار</p>
+                                <button class="btn btn-outline">اختر الملفات</button>
+                            </div>
+                            <div class="uploaded-images">
+                                <div class="uploaded-thumb">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="uploaded-thumb">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="uploaded-thumb add-more">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-full">
+                                <i class="fas fa-paper-plane"></i>
+                                نشر العقار
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== قسم الموافقة على البوستات (للوسيط) ========== -->
+        <section class="dashboard-section" id="pending-properties-section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <h2>الموافقة على البوستات المنشورة</h2>
+                    <div class="agent-balance-card">
+                        <div class="balance-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="balance-info">
+                            <span class="balance-label">الرصيد المتاح</span>
+                            <span class="balance-amount" id="agentBalance">0.00</span>
+                            <span class="balance-currency">د.أ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="pending-properties-container">
+                    <div class="pending-properties-grid" id="pendingPropertiesGrid">
+                        <!-- سيتم ملؤها ديناميكياً من JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 حمزة العقاري - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- Modal تفاصيل العقار والمراسلة -->
+    <div id="propertyModal" class="property-modal">
+        <div class="property-modal-overlay" onclick="closePropertyModal()"></div>
+        <div class="property-modal-content">
+            <button class="property-modal-close" onclick="closePropertyModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="property-modal-body" id="propertyModalBody">
+                <!-- سيتم ملؤها ديناميكياً -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
+
